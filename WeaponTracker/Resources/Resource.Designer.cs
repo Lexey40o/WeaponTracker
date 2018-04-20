@@ -45,19 +45,46 @@ namespace WeaponTracker
 		{
 			
 			// aapt resource value: 0x7f040003
-			public const int MainLayout = 2130968579;
-			
-			// aapt resource value: 0x7f040004
-			public const int WeaponListView = 2130968580;
-			
-			// aapt resource value: 0x7f040001
-			public const int WeaponNameTextView = 2130968577;
-			
-			// aapt resource value: 0x7f040000
-			public const int WeaponPositionTextView = 2130968576;
+			public const int BaseDamageSpinner = 2130968579;
 			
 			// aapt resource value: 0x7f040002
-			public const int WeaponStatsTextView = 2130968578;
+			public const int BaseDamageText = 2130968578;
+			
+			// aapt resource value: 0x7f040009
+			public const int CancelButton = 2130968585;
+			
+			// aapt resource value: 0x7f040008
+			public const int ConfirmButton = 2130968584;
+			
+			// aapt resource value: 0x7f040005
+			public const int DamageModifierNumberPicker = 2130968581;
+			
+			// aapt resource value: 0x7f040004
+			public const int DamageModifierText = 2130968580;
+			
+			// aapt resource value: 0x7f04000c
+			public const int MainLayout = 2130968588;
+			
+			// aapt resource value: 0x7f040007
+			public const int StoneSpinner = 2130968583;
+			
+			// aapt resource value: 0x7f04000d
+			public const int WeaponListView = 2130968589;
+			
+			// aapt resource value: 0x7f040000
+			public const int WeaponNameText = 2130968576;
+			
+			// aapt resource value: 0x7f040001
+			public const int WeaponNameTextField = 2130968577;
+			
+			// aapt resource value: 0x7f04000a
+			public const int WeaponNameTextView = 2130968586;
+			
+			// aapt resource value: 0x7f04000b
+			public const int WeaponStatsTextView = 2130968587;
+			
+			// aapt resource value: 0x7f040006
+			public const int WeaponStoneText = 2130968582;
 			
 			static Id()
 			{

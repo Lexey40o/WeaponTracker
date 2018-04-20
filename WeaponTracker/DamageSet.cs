@@ -17,16 +17,14 @@ namespace WeaponTracker
         public enum AcriStone { None = 0, Green = 1, Yellow = 2, Orange = 3, Red = 4, Blue = 5, Purple = 6, Black = 7, White = 8 };
         public enum Dice { d4 = 4, d6 = 6, d8 = 8, d10 = 10, d12 = 12 };
 
-        private List<Dice> DamageDice;
-        public AcriStone Stone = AcriStone.None;
+        public List<Dice> DamageDice;
         public int DamageBonus;
 
         public DamageSet() { }
-        public DamageSet(List<Dice> dices, int bonus, AcriStone stone = AcriStone.None)
+        public DamageSet(List<Dice> dices, int bonus)
         {
             DamageDice = dices;
             DamageBonus = bonus;
-            Stone = stone;
         }
 
         public bool isEmpty()
@@ -64,8 +62,7 @@ namespace WeaponTracker
             {
                 newDiceList[newDiceList.IndexOf(newDiceList.Min())] = (Dice)(lowestDamageDice + stoneValue - extraDamage);
             }
-
-            newDamageSet.Stone = stone;
+            
             newDamageSet.DamageDice = newDiceList;
             newDamageSet.DamageBonus = DamageBonus + extraDamage;
 

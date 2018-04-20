@@ -6,10 +6,64 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <TextView
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Weapon Name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/WeaponPositionTextView"
+        android:id="@+id/WeaponNameText"
+        android:gravity="center"
+        android:layout_marginTop="10dp" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/WeaponNameTextField"
+        android:textAlignment="gravity" />
+    <TextView
+        android:text="Base Damage"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/BaseDamageText"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:layout_marginTop="25dp" />
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/BaseDamageSpinner" />
+    <TextView
+        android:text="Damage Modifier"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/DamageModifierText"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:layout_marginTop="25dp" />
+    <NumberPicker
+        android:layout_width="match_parent"
+        android:layout_height="53.7dp"
+        android:id="@+id/DamageModifierNumberPicker" />
+    <TextView
+        android:text="Stone"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/WeaponStoneText"
+        android:layout_marginTop="25dp"
         android:gravity="center" />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/StoneSpinner" />
+    <Button
+        android:text="Confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ConfirmButton"
+        android:layout_marginTop="75dp" />
+    <Button
+        android:text="Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CancelButton"
+        android:layout_marginTop="10dp" />
 </LinearLayout>
