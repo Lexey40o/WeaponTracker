@@ -16,14 +16,14 @@ namespace WeaponTracker
     [Activity(Label = "CreateWeaponActivity")]
     public class CreateWeaponActivity : Activity
     {
-        public static readonly string[] BaseDamageSpinnerSetsLabels = { "1d4", "1d6", "2d6", "1d8", "1d10", "1d12" };
+        public static readonly string[] BaseDamageSpinnerSetsLabels = Enum.GetNames(typeof(DamageSet.Dice)); // { "1d4", "1d6", "2d6", "1d8", "1d10", "1d12" };
         public static readonly List<DamageSet.Dice>[] BaseDamageSpinnerSets = { new List<DamageSet.Dice> { DamageSet.Dice.d4 }, new List<DamageSet.Dice> { DamageSet.Dice.d6 }, new List<DamageSet.Dice> { DamageSet.Dice.d6, DamageSet.Dice.d6 }, new List<DamageSet.Dice> { DamageSet.Dice.d8 }, new List<DamageSet.Dice> { DamageSet.Dice.d10 }, new List<DamageSet.Dice> { DamageSet.Dice.d12 } };
         public static readonly DamageSet.AcriStone[] StoneSpinnerStones = { DamageSet.AcriStone.None, DamageSet.AcriStone.Green, DamageSet.AcriStone.Yellow, DamageSet.AcriStone.Orange, DamageSet.AcriStone.Red, DamageSet.AcriStone.Blue, DamageSet.AcriStone.Purple, DamageSet.AcriStone.Black, DamageSet.AcriStone.White };
 
         private TextView WeaponNameTextField;
         private Spinner BaseDamageSpinner, StoneSpinner;
         private NumberPicker DamageModifier;
-        private Button ConfirmButton, CancelButton;
+        private Button ConfirmButton, CancelButton, DeleteButton;
 
         private int SelectedWeaponIndex, ResultDamageModifier;
         private string ResultWeaponName;
@@ -44,6 +44,7 @@ namespace WeaponTracker
             StoneSpinner = FindViewById<Spinner>(Resource.Id.StoneSpinner);
             ConfirmButton = FindViewById<Button>(Resource.Id.ConfirmButton);
             CancelButton = FindViewById<Button>(Resource.Id.CancelButton);
+            DeleteButton = FindViewById<Button>(Resource.Id.DeleteButton);
 
             // Assign events to user inputs
             WeaponNameTextField.TextChanged += WeaponNameTextField_TextChanged;
@@ -52,6 +53,7 @@ namespace WeaponTracker
             StoneSpinner.ItemSelected += StoneSpinner_ItemSelected;
             ConfirmButton.Click += ConfirmButton_Click;
             CancelButton.Click += CancelButton_Click;
+            DeleteButton.Click += DeleteButton_Click;
 
             // Create array adapters for each spinner
             ArrayAdapter<string> BaseDamageSpinnerArrayAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, BaseDamageSpinnerSetsLabels);
@@ -69,7 +71,7 @@ namespace WeaponTracker
 
 
             // Get selected weapon attributes
-            if (!Intent.Extras.IsEmpty)
+            if (Intent.Extras != null)
             {
                 SelectedWeaponIndex = Intent.Extras.GetInt("WeaponIndex");
                 ResultWeaponName = Intent.Extras.GetString("WeaponName");
@@ -113,6 +115,7 @@ namespace WeaponTracker
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
+            SetResult(Result.Ok, new Intent(this, typeof(MainActivity)));
             Finish();
         }
 
@@ -125,6 +128,14 @@ namespace WeaponTracker
             intent.PutExtra("ResultDamageModifier", ResultDamageModifier);
             intent.PutExtra("ResultAcriStone", JsonConvert.SerializeObject(ResultAcriStone));
             SetResult(Result.Ok, intent);
+            Finish();
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(MainActivity));
+            intent.PutExtra("SelectedWeaponIndex", SelectedWeaponIndex);
+            SetResult(Result.Canceled, intent);
             Finish();
         }
     }

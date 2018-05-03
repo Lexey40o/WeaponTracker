@@ -12,6 +12,8 @@ namespace WeaponTracker
     {
         private List<Weapon> Weapons = new List<Weapon>();
         private ListView WeaponListView;
+        private WeaponListViewAdapter ViewAdapter;
+        private Button NewWeaponButton;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -40,8 +42,10 @@ namespace WeaponTracker
             Weapons[8].ChangeAcriStones(DamageSet.AcriStone.White);
 
             WeaponListView = FindViewById<ListView>(Resource.Id.WeaponListView);
-            var viewAdapter = new WeaponListViewAdapter(this, Weapons);
-            WeaponListView.Adapter = viewAdapter;
+            ViewAdapter = new WeaponListViewAdapter(this, Weapons);
+            WeaponListView.Adapter = ViewAdapter;
+
+            NewWeaponButton = FindViewById<Button>(Resource.Id.NewWeaponButton);
 
             HandleEvents();
         }
@@ -49,6 +53,7 @@ namespace WeaponTracker
         private void HandleEvents()
         {
             WeaponListView.ItemLongClick += WeaponList_ItemLongClick;
+            NewWeaponButton.Click += (s, e) => { StartActivityForResult(new Intent(this, typeof(CreateWeaponActivity)), 101); };
         }
 
         private void WeaponList_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
@@ -65,7 +70,7 @@ namespace WeaponTracker
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            if(requestCode == 100 && resultCode == Result.Ok)
+            if(resultCode == Result.Ok && requestCode == 100)
             {
                 var changedWeaponIndex = data.Extras.GetInt("SelectedWeaponIndex");
                 var changedWeaponName = data.Extras.GetString("ResultWeaponName");
@@ -75,6 +80,17 @@ namespace WeaponTracker
                 Weapons[changedWeaponIndex] = new Weapon(changedWeaponDamageSet, changedWeaponName);
                 Weapons[changedWeaponIndex].ChangeAcriStones(changedAcriStone);
             }
+            else if (requestCode == 101 && resultCode == Result.Ok)
+            {
+                Weapons.Add(new Weapon(changedWeaponDamageSet, changedWeaponName));
+                Weapons[Weapons.Count - 1].ChangeAcriStones(changedAcriStone);
+            }
+            else if(resultCode == Result.Canceled)
+            {
+                Weapons.Remove(Weapons[data.Extras.GetInt("SelectedWeaponIndex")]);
+            }
+
+            ViewAdapter.NotifyDataSetChanged();
         }
     }
 }

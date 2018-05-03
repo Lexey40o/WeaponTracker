@@ -1,69 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:minWidth="25px"
+    p1:minHeight="25px"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/CreateWeaponLinearLayout"
+    p1:orientation="vertical">
     <TextView
-        android:text="Weapon Name"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/WeaponNameText"
-        android:gravity="center"
-        android:layout_marginTop="10dp" />
+        p1:text="Weapon Name"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/WeaponNameText"
+        p1:gravity="center"
+        p1:layout_weight="0.5" />
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/WeaponNameTextField"
-        android:textAlignment="gravity" />
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/WeaponNameTextField"
+        p1:textAlignment="gravity"
+        p1:singleLine="true"
+        p1:layout_weight="1" />
     <TextView
-        android:text="Base Damage"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/BaseDamageText"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:gravity="center"
-        android:layout_marginTop="25dp" />
+        p1:text="Base Damage"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:id="@+id/BaseDamageText"
+        p1:layout_width="fill_parent"
+        p1:gravity="center"
+        p1:layout_weight="0.5"
+        p1:layout_height="wrap_content" />
     <Spinner
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/BaseDamageSpinner" />
+        p1:layout_width="fill_parent"
+        p1:id="@+id/BaseDamageSpinner"
+        p1:layout_weight="1"
+        p1:layout_height="wrap_content" />
     <TextView
-        android:text="Damage Modifier"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/DamageModifierText"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:gravity="center"
-        android:layout_marginTop="25dp" />
+        p1:text="Stone"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:layout_width="match_parent"
+        p1:id="@+id/WeaponStoneText"
+        p1:gravity="center"
+        p1:layout_weight="0.5"
+        p1:layout_height="wrap_content" />
+    <Spinner
+        p1:layout_width="match_parent"
+        p1:id="@+id/StoneSpinner"
+        p1:layout_weight="1"
+        p1:layout_height="wrap_content" />
+    <TextView
+        p1:text="Damage Modifier"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:id="@+id/DamageModifierText"
+        p1:layout_width="fill_parent"
+        p1:gravity="center"
+        p1:layout_weight="0.5"
+        p1:layout_height="wrap_content" />
     <NumberPicker
-        android:layout_width="match_parent"
-        android:layout_height="53.7dp"
-        android:id="@+id/DamageModifierNumberPicker" />
-    <TextView
-        android:text="Stone"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/WeaponStoneText"
-        android:layout_marginTop="25dp"
-        android:gravity="center" />
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/StoneSpinner" />
+        p1:layout_width="match_parent"
+        p1:id="@+id/DamageModifierNumberPicker"
+        p1:layout_height="30dp"
+        p1:layout_weight="1" />
     <Button
-        android:text="Confirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ConfirmButton"
-        android:layout_marginTop="75dp" />
+        p1:text="Confirm"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/ConfirmButton"
+        p1:background="@android:color/holo_green_dark"
+        p1:layout_weight="0.1" />
     <Button
-        android:text="Cancel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/CancelButton"
-        android:layout_marginTop="10dp" />
+        p1:text="Cancel"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/CancelButton"
+        p1:background="@android:color/background_dark"
+        p1:layout_weight="0.1" />
+    <Button
+        p1:text="Delete"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/DeleteButton"
+        p1:background="@android:color/holo_red_dark"
+        p1:textColor="@android:color/black"
+        p1:layout_weight="0.1" />
 </LinearLayout>
