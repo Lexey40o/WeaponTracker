@@ -16,13 +16,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/WeaponNameTextView"
         android:gravity="center"
-        android:capitalize="words"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginBottom="5dp"
+        android:textSize="17.5dp"
+        android:inputType="textVisiblePassword" />
     <TextView
         android:text="WeaponStats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/WeaponStatsTextView"
         android:gravity="center"
-        android:textSize="20dp" />
+        android:textSize="15dp" />
 </LinearLayout>

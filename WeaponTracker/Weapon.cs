@@ -30,7 +30,7 @@ namespace WeaponTracker
             string baseDamageString = string.Join(" ", BaseDamage.listOfDice());
             string modifiedDamageString = !ModifiedDamage.isEmpty() ? string.Join(" ", ModifiedDamage.listOfDice()) : "";
 
-            return $"Base: {baseDamageString} + {BaseDamage.DamageBonus}" + (!ModifiedDamage.isEmpty() ? $", Modified: {modifiedDamageString} + {ModifiedDamage.DamageBonus}" : "") + $". Stone: {UpgradeStone}";
+            return $"Base: {baseDamageString} + {BaseDamage.DamageBonus}" + (!ModifiedDamage.isEmpty() ? $"\n Modified: {modifiedDamageString} + {ModifiedDamage.DamageBonus}" : "") + $"\n Stone: {UpgradeStone}";
         }
 
         public void ChangeAcriStones(DamageSet.AcriStone stone)

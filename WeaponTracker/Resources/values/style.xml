@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="Theme.Custom" parent="@android:style/Theme.DeviceDefault">
+    <item name="android:textColorPrimary">#ffeeeeee</item>
+    <item name="android:textColorSecondary">#ff212121</item>
+    <item name="android:colorButtonNormal">#ff212121</item>
+    <item name="android:colorBackground">#ff424242</item>
+    <item name="android:windowBackground">?android:attr/colorBackground</item>
+  </style>
+
+  <style name="SplashTheme" parent="android:Theme">
+    <item name="android:background">@drawable/splash_background</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+  </style>
+</resources>

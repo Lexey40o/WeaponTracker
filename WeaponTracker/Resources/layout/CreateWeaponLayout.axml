@@ -5,7 +5,9 @@
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
     p1:id="@+id/CreateWeaponLinearLayout"
-    p1:orientation="vertical">
+    p1:orientation="vertical"
+    p1:focusedByDefault="true"
+    p1:focusableInTouchMode="true">
     <TextView
         p1:text="Weapon Name"
         p1:textAppearance="?android:attr/textAppearanceMedium"
@@ -13,14 +15,21 @@
         p1:layout_height="wrap_content"
         p1:id="@+id/WeaponNameText"
         p1:gravity="center"
-        p1:layout_weight="0.5" />
+        p1:layout_weight="0.5"
+        p1:layout_marginBottom="0.0dp" />
     <EditText
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/WeaponNameTextField"
         p1:textAlignment="gravity"
         p1:singleLine="true"
-        p1:layout_weight="1" />
+        p1:layout_weight="1"
+        p1:maxLength="25"
+        p1:gravity="center"
+        p1:imeOptions="actionDone"
+        p1:selectAllOnFocus="true"
+        p1:capitalize="words"
+        p1:layout_marginBottom="20dp" />
     <TextView
         p1:text="Base Damage"
         p1:textAppearance="?android:attr/textAppearanceMedium"
@@ -42,11 +51,20 @@
         p1:gravity="center"
         p1:layout_weight="0.5"
         p1:layout_height="wrap_content" />
-    <Spinner
+    <EditText
         p1:layout_width="match_parent"
-        p1:id="@+id/StoneSpinner"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/StoneTextField"
         p1:layout_weight="1"
-        p1:layout_height="wrap_content" />
+        p1:gravity="center"
+        p1:textAlignment="center"
+        p1:singleLine="true"
+        p1:selectAllOnFocus="true"
+        p1:imeOptions="actionDone"
+        p1:maxLength="25"
+        p1:inputType="textVisiblePassword"
+        p1:fontFamily="@font/barazhad"
+        p1:digits="abcdefghijklmnopqrstuvwxyz" />
     <TextView
         p1:text="Damage Modifier"
         p1:textAppearance="?android:attr/textAppearanceMedium"
@@ -59,27 +77,31 @@
         p1:layout_width="match_parent"
         p1:id="@+id/DamageModifierNumberPicker"
         p1:layout_height="30dp"
-        p1:layout_weight="1" />
+        p1:layout_weight="1"
+        p1:descendantFocusability="blocksDescendants" />
     <Button
         p1:text="Confirm"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/ConfirmButton"
-        p1:background="@android:color/holo_green_dark"
-        p1:layout_weight="0.1" />
+        p1:layout_weight="0.1"
+        p1:textColor="#dbdbdb"
+        p1:backgroundTint="#ff29720d" />
     <Button
         p1:text="Cancel"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/CancelButton"
-        p1:background="@android:color/background_dark"
-        p1:layout_weight="0.1" />
+        p1:layout_weight="0.1"
+        p1:textColor="#dbdbdb"
+        p1:backgroundTint="#ff1e1e1e" />
     <Button
         p1:text="Delete"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/DeleteButton"
-        p1:background="@android:color/holo_red_dark"
-        p1:textColor="@android:color/black"
-        p1:layout_weight="0.1" />
+        p1:layout_weight="0.1"
+        p1:visibility="visible"
+        p1:textColor="#dbdbdb"
+        p1:backgroundTint="#ff720d0d" />
 </LinearLayout>

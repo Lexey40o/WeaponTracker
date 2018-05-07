@@ -5,7 +5,9 @@
     p1:minHeight="25px"
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
-    p1:id="@+id/MainLayout">
+    p1:id="@+id/MainLayout"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:gridSpec="1|8|#0093eeff|K:#ee8700ff:16,l:72,l:16,r|S:#83ee00ff:16,0,l:16,56,l:16,0,r">
     <ListView
         p1:layout_width="match_parent"
         p1:layout_height="match_parent"
@@ -17,5 +19,6 @@
         p1:text="New Weapon"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
-        p1:id="@+id/NewWeaponButton" />
+        p1:id="@+id/NewWeaponButton"
+        p1:backgroundTint="#ff1e1e1e" />
 </LinearLayout>

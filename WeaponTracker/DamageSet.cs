@@ -51,7 +51,7 @@ namespace WeaponTracker
             if((maxDiceValue + minDiceValue) - lowestDamageDice <= stoneValue)
             {
                 newDiceList[newDiceList.IndexOf(newDiceList.Min())] = Dice.d12;
-                newDiceList.Insert(newDiceList.Count, (Dice)((stoneValue - extraDamage) - (minDiceValue - (maxDiceValue - lowestDamageDice))));
+                newDiceList.Insert(newDiceList.Count, (Dice)((stoneValue - extraDamage) - (maxDiceValue - lowestDamageDice)));
             }
             else if (maxDiceValue - lowestDamageDice < stoneValue && stoneValue - (maxDiceValue - lowestDamageDice) < minDiceValue)
             {
@@ -67,6 +67,56 @@ namespace WeaponTracker
             newDamageSet.DamageBonus = DamageBonus + extraDamage;
 
             return newDamageSet;
+        }
+
+        public static AcriStone DecodeAcriSymbol(string symbol)
+        {
+            switch (symbol.ToUpper())
+            {
+                case "VIRHREI":
+                    return AcriStone.Green;
+                case "KELAVOTAINEN":
+                    return AcriStone.Yellow;
+                case "AURANOSSI":
+                    return AcriStone.Orange;
+                case "PURUBRAINEN":
+                    return AcriStone.Red;
+                case "CAERINILEUM":
+                    return AcriStone.Blue;
+                case "VIOPURETTI":
+                    return AcriStone.Purple;
+                case "NISTAGREOS":
+                    return AcriStone.Black;
+                case "VALKOIBUNEN":
+                    return AcriStone.White;
+                default:
+                    return AcriStone.None;
+            }
+        }
+
+        public static string EncodeAcriSymbol(AcriStone stone)
+        {
+            switch (stone)
+            {
+                case AcriStone.Green:
+                    return "VIRHREI";
+                case AcriStone.Yellow:
+                    return "KELAVOTAINEN";
+                case AcriStone.Orange:
+                    return "AURANOSSI";
+                case AcriStone.Red:
+                    return "PURUBRAINEN";
+                case AcriStone.Blue:
+                    return "CAERINILEUM";
+                case AcriStone.Purple:
+                    return "VIOPURETTI";
+                case AcriStone.Black:
+                    return "NISTAGREOS";
+                case AcriStone.White:
+                    return "VALKOIBUNEN";
+                default:
+                    return "";
+            }
         }
     }
 }

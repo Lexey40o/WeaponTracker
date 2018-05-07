@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace WeaponTracker
 {
-    [Activity(Label = "WeaponTracker", MainLauncher = true)]
+    [Activity(Label = "Weapon List")]
     public class MainActivity : Activity
     {
         private List<Weapon> Weapons = new List<Weapon>();
@@ -18,42 +18,62 @@ namespace WeaponTracker
         {
             base.OnCreate(savedInstanceState);
 
-            // Set our view from the "main" layout resource
+            // Set our view from the "main" layout resource.
             SetContentView(Resource.Layout.Main);
 
-            Weapons.Add(new Weapon(new DamageSet(new List<DamageSet.Dice> { DamageSet.Dice.d10 }, 2), "Halberd"));
-            Weapons.Add(new Weapon(new DamageSet(new List<DamageSet.Dice> { DamageSet.Dice.d10 }, 2), "Halberd"));
-            Weapons.Add(new Weapon(new DamageSet(new List<DamageSet.Dice> { DamageSet.Dice.d10 }, 2), "Halberd"));
-            Weapons.Add(new Weapon(new DamageSet(new List<DamageSet.Dice> { DamageSet.Dice.d10 }, 2), "Halberd"));
-            Weapons.Add(new Weapon(new DamageSet(new List<DamageSet.Dice> { DamageSet.Dice.d10 }, 2), "Halberd"));
-            Weapons.Add(new Weapon(new DamageSet(new List<DamageSet.Dice> { DamageSet.Dice.d10 }, 2), "Halberd"));
-            Weapons.Add(new Weapon(new DamageSet(new List<DamageSet.Dice> { DamageSet.Dice.d10 }, 2), "Halberd"));
-            Weapons.Add(new Weapon(new DamageSet(new List<DamageSet.Dice> { DamageSet.Dice.d10 }, 2), "Halberd"));
-            Weapons.Add(new Weapon(new DamageSet(new List<DamageSet.Dice> { DamageSet.Dice.d10 }, 2), "Halberd"));
+            // Restore state or load from preferences.
+            if (savedInstanceState != null)
+            {
+                var deserializedWeapons = JsonConvert.DeserializeObject<List<Weapon>>(savedInstanceState.GetString("Weapons"));
+                Weapons = deserializedWeapons.Count > 0 ? deserializedWeapons : Weapons;
+            }
+            else if(GetPreferences(FileCreationMode.Private).Contains("WeaponList"))
+            {
+                Weapons = JsonConvert.DeserializeObject<List<Weapon>>(GetPreferences(FileCreationMode.Private).GetString("WeaponList", JsonConvert.SerializeObject(new List<Weapon>())));
+            }
 
-            Weapons[0].ChangeAcriStones(DamageSet.AcriStone.None);
-            Weapons[1].ChangeAcriStones(DamageSet.AcriStone.Green);
-            Weapons[2].ChangeAcriStones(DamageSet.AcriStone.Yellow);
-            Weapons[3].ChangeAcriStones(DamageSet.AcriStone.Orange);
-            Weapons[4].ChangeAcriStones(DamageSet.AcriStone.Red);
-            Weapons[5].ChangeAcriStones(DamageSet.AcriStone.Blue);
-            Weapons[6].ChangeAcriStones(DamageSet.AcriStone.Purple);
-            Weapons[7].ChangeAcriStones(DamageSet.AcriStone.Black);
-            Weapons[8].ChangeAcriStones(DamageSet.AcriStone.White);
-
+            // Create a weaponlistview with an adapter.
             WeaponListView = FindViewById<ListView>(Resource.Id.WeaponListView);
             ViewAdapter = new WeaponListViewAdapter(this, Weapons);
             WeaponListView.Adapter = ViewAdapter;
 
+            // Create the button to add a weapon.
             NewWeaponButton = FindViewById<Button>(Resource.Id.NewWeaponButton);
 
             HandleEvents();
         }
 
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            outState.PutString("Weapons", JsonConvert.SerializeObject(Weapons));
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            // Save weaponlist to a preferences string.
+            using (var editor = GetPreferences(FileCreationMode.Private).Edit())
+            {
+                editor.PutString("WeaponList", JsonConvert.SerializeObject(Weapons));
+                editor.Commit();
+            }
+        }
+
         private void HandleEvents()
         {
             WeaponListView.ItemLongClick += WeaponList_ItemLongClick;
-            NewWeaponButton.Click += (s, e) => { StartActivityForResult(new Intent(this, typeof(CreateWeaponActivity)), 101); };
+            NewWeaponButton.Click += NewWeaponButton_Click;
+        }
+
+        private void NewWeaponButton_Click(object sender, System.EventArgs e)
+        {
+            var intent = new Intent(this, typeof(CreateWeaponActivity));
+            intent.PutExtra("NewWeapon", true);
+
+            StartActivityForResult(intent, 101);
         }
 
         private void WeaponList_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
@@ -62,7 +82,7 @@ namespace WeaponTracker
             intent.PutExtra("WeaponIndex", e.Position);
             intent.PutExtra("WeaponName", Weapons[e.Position].WeaponName);
             intent.PutExtra("BaseDamage", JsonConvert.SerializeObject(Weapons[e.Position].BaseDamage));
-            intent.PutExtra("Stone", JsonConvert.SerializeObject(Weapons[e.Position].UpgradeStone));
+            intent.PutExtra("Stone", DamageSet.EncodeAcriSymbol(Weapons[e.Position].UpgradeStone));
 
             StartActivityForResult(intent, 100);
         }
@@ -70,22 +90,26 @@ namespace WeaponTracker
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            if(resultCode == Result.Ok && requestCode == 100)
+            if(resultCode == Result.Ok)
             {
                 var changedWeaponIndex = data.Extras.GetInt("SelectedWeaponIndex");
                 var changedWeaponName = data.Extras.GetString("ResultWeaponName");
                 var changedWeaponDamageSet = new DamageSet(JsonConvert.DeserializeObject<List<DamageSet.Dice>>(data.Extras.GetString("ResultDamageDice")), data.Extras.GetInt("ResultDamageModifier"));
-                var changedAcriStone = JsonConvert.DeserializeObject<DamageSet.AcriStone>(data.Extras.GetString("ResultAcriStone"));
+                var changedAcriStone = DamageSet.DecodeAcriSymbol(data.Extras.GetString("ResultAcriStone"));
 
-                Weapons[changedWeaponIndex] = new Weapon(changedWeaponDamageSet, changedWeaponName);
-                Weapons[changedWeaponIndex].ChangeAcriStones(changedAcriStone);
+                if (requestCode == 100)
+                {
+                    Weapons[changedWeaponIndex] = new Weapon(changedWeaponDamageSet, changedWeaponName);
+                    Weapons[changedWeaponIndex].ChangeAcriStones(changedAcriStone);
+                }
+                else if(requestCode == 101)
+                {
+                    Weapons.Add(new Weapon(changedWeaponDamageSet, changedWeaponName));
+                    Weapons[Weapons.Count - 1].ChangeAcriStones(changedAcriStone);
+                }
             }
-            else if (requestCode == 101 && resultCode == Result.Ok)
-            {
-                Weapons.Add(new Weapon(changedWeaponDamageSet, changedWeaponName));
-                Weapons[Weapons.Count - 1].ChangeAcriStones(changedAcriStone);
-            }
-            else if(resultCode == Result.Canceled)
+
+            else if(resultCode == Result.FirstUser)
             {
                 Weapons.Remove(Weapons[data.Extras.GetInt("SelectedWeaponIndex")]);
             }
