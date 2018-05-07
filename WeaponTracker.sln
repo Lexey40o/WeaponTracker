@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeaponTracker", "WeaponTracker\WeaponTracker.csproj", "{8A7FA812-18FA-4F28-A124-2DF34E20BE2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acri Tracker", "WeaponTracker\Acri Tracker.csproj", "{8A7FA812-18FA-4F28-A124-2DF34E20BE2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

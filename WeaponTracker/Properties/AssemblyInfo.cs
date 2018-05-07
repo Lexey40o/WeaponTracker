@@ -6,15 +6,20 @@ using Android.App;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WeaponTracker")]
+[assembly: AssemblyTitle("Acri Tracker")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WeaponTracker")]
+[assembly: AssemblyProduct("Acri Tracker")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
+#if DEBUG
+[assembly: Application(Debuggable=true, Icon = "@mipmap/ic_square_launcher", RoundIcon = "@mipmap/ic_launcher")]
+#else
+[assembly: Application(Debuggable = false, Icon = "@mipmap/ic_square_launcher", RoundIcon = "@mipmap/ic_launcher")]
+#endif
 
 // Version information for an assembly consists of the following four values:
 //

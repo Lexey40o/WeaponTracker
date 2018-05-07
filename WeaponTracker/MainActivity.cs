@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace WeaponTracker
 {
-    [Activity(Label = "Weapon List")]
+    [Activity(Label = "Weapon List", Theme = "@android:style/Theme.Material")]
     public class MainActivity : Activity
     {
         private List<Weapon> Weapons = new List<Weapon>();

@@ -15,7 +15,7 @@ using Android.Support.V4.Content.Res;
 
 namespace WeaponTracker
 {
-    [Activity(Label = "Weapon Editor")]
+    [Activity(Label = "Weapon Editor", Theme = "@android:style/Theme.Material")]
     public class CreateWeaponActivity : Activity
     {
         public static readonly string[] BaseDamageSpinnerSetsLabels = { "1d4", "1d6", "2d6", "1d8", "1d10", "1d12" };
